@@ -10,6 +10,6 @@ namespace BotFS
         public string Name { get; set; }
         public BaseServerProvider<A> Provider {get;set;}
         public DBResponse<BaseServerProvider<A>> TryConnect();
-        public DBResponse<Database<T,A>> GetDatabase(string Name);
+        public DBResponse<IDatabase<T,A>> GetDatabase(string Name);
     }
 }

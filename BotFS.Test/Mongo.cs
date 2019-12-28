@@ -3,7 +3,7 @@ using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 
-namespace BotFS.Test
+namespace BotFS.MongoDB
 {
     public class Mongo : IServerProvider<MongoProvider,MongoClient>
     {
@@ -18,13 +18,13 @@ namespace BotFS.Test
             this.Provider = this.TryConnect().Response;
         }
 
-        public DBResponse<Database<MongoProvider, MongoClient>> GetDatabase(string Name)
+        public DBResponse<IDatabase<MongoProvider, MongoClient>> GetDatabase(string Name)
         {
-            if (this.Provider == null) return new DBResponse<Database<MongoProvider, MongoClient>> { HasValue = false, Response = null };
+            if (this.Provider == null) return new DBResponse<IDatabase<MongoProvider, MongoClient>> { HasValue = false, Response = null };
             var call = this.Provider.Refresh();
             if (call.HasValue && this.Provider.Databases == null) this.Provider.Databases = call.Response;
             else if (!call.HasValue && this.Provider.Databases == null) this.Provider.Databases = new List<string>();
-            var response = new DBResponse<Database<MongoProvider, MongoClient>>
+            var response = new DBResponse<IDatabase<MongoProvider, MongoClient>>
             {
                 HasValue = true,
                 Response = this.Provider.Server.GetDatabase(Name).ToBFS(this.Provider)

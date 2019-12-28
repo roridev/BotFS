@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using MongoDB.Driver;
-namespace BotFS.Test
+namespace BotFS.MongoDB
 {
     public class MongoProvider : BaseServerProvider<MongoClient>
     {

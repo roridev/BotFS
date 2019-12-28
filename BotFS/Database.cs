@@ -6,7 +6,7 @@ namespace BotFS
     /// A Generic Database
     /// </summary>
     /// <typeparam name="T"> The provider class</typeparam>
-    public interface Database<T,A> where T : BaseServerProvider<A>
+    public interface IDatabase<T,A> where T : BaseServerProvider<A>
     {
         /// <summary>
         /// The name of the database
@@ -24,6 +24,14 @@ namespace BotFS
         /// A list containing the names of all database tables.
         /// </summary>
         public List<string> Tables {get;set;}
+        /// <summary>
+        /// Drops the database 
+        /// </summary>
         public DBResponse<bool> Drop();
+        /// <summary>
+        /// Refreshes the current database cache
+        /// </summary>
+        /// <returns></returns>
+        public DBResponse<List<string>> Refresh();
     }
 }

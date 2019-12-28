@@ -10,16 +10,24 @@ namespace BotFS
     /// <typeparam name="T">
     /// The type of that table (POCO)
     /// </typeparam>
-    public interface IDBTable<T>
+    /// <typeparam name="Db">
+    /// The database type of said table
+    /// </typeparam>
+    public interface IDBTable<T,Db> 
     {
          /// <summary>
-        /// The name of the database the table is stored.
+        /// The database the table is stored.
         /// </summary>
-        public string Database { get; set; }
+        public Db Database { get; set; }
+        /// <summary>
+        /// The name of the table.
+        /// </summary>
+        public string Name { get; set; }
+
         /// <summary>
         /// The quantity of database objects in said table.
         /// </summary>
-        public int Size { get; set; }
+        public long Size { get; set; }
         /// <summary>
         /// Finds a database object that matches a filter
         /// </summary>
@@ -49,7 +57,7 @@ namespace BotFS
         /// <summary>
         /// Refresh the database.
         /// </summary>
-        public DBResponse<IDBTable<T>> Refresh();
+        public DBResponse<IDBTable<T,Db>> Refresh();
         /// <summary>
         /// Drop the database.
         /// </summary>

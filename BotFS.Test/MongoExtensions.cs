@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace BotFS.Test
+namespace BotFS.MongoDB
 {
     public static class MongoExtensions
     {
@@ -18,5 +18,29 @@ namespace BotFS.Test
             };
             return responce;
         }
+        public static MongoTable<T> ToBFS<T>(this IMongoCollection<T> collection, MongoDatabase db)
+        {
+            var response = new MongoTable<T>
+            {
+                Database = db,
+                Size = collection.CountDocuments<T>(_ => true),
+                Name = collection.CollectionNamespace.CollectionName
+            };
+            return response;
+        }
+        public static DBResponse<MongoTable<T>> GetTable<T>(this MongoDatabase db, string Name)
+        {
+            
+            var response = new DBResponse<MongoTable<T>>
+            {
+                HasValue = false
+            };
+            if (db.Tables == null) db.Refresh();
+            response.HasValue = true;
+            response.Response = db.Provider.Server.GetDatabase(db.Name).GetCollection<T>(Name).ToBFS(db);
+            db.Refresh();
+            return response;
+        }
+
     }
 }
