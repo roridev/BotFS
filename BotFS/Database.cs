@@ -15,7 +15,7 @@ namespace BotFS
         /// <summary>
         /// The Server that said database is stored.
         /// </summary>
-        public BaseServerProvider<A> Server { get; set; }
+        public BaseServerProvider<A> Provider { get; set; }
          /// <summary>
         /// The quantity of database tables in the database.
         /// </summary>
@@ -24,5 +24,6 @@ namespace BotFS
         /// A list containing the names of all database tables.
         /// </summary>
         public List<string> Tables {get;set;}
+        public DBResponse<bool> Drop();
     }
 }

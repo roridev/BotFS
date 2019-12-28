@@ -1,6 +1,7 @@
 using MongoDB.Driver;
  using static BotFS.Utils.Logger;
 using System;
+using System.Collections.Generic;
 
 namespace BotFS.Test
 {
@@ -14,21 +15,23 @@ namespace BotFS.Test
         {
             this.Name = name;
             this.ConnectionString = connectionString;
-            var connection = this.TryConnect();
-            if (connection.HasValue)
-                this.Provider = connection.Response;
+            this.Provider = this.TryConnect().Response;
         }
 
         public DBResponse<Database<MongoProvider, MongoClient>> GetDatabase(string Name)
         {
+            if (this.Provider == null) return new DBResponse<Database<MongoProvider, MongoClient>> { HasValue = false, Response = null };
+            var call = this.Provider.Refresh();
+            if (call.HasValue && this.Provider.Databases == null) this.Provider.Databases = call.Response;
+            else if (!call.HasValue && this.Provider.Databases == null) this.Provider.Databases = new List<string>();
             var response = new DBResponse<Database<MongoProvider, MongoClient>>
             {
-                HasValue = this.Provider.Databases.Contains(Name),
-                Response = this.Provider.Databases.Contains(Name) ? this.Provider.Server.GetDatabase(Name).ToBFS(this.Provider) : null
+                HasValue = true,
+                Response = this.Provider.Server.GetDatabase(Name).ToBFS(this.Provider)
             };
             return response;
         }
-
+        
         public DBResponse<BaseServerProvider<MongoClient>> TryConnect()
         {
             Log(this.Name,"Attemping to connect to database.");
@@ -36,7 +39,8 @@ namespace BotFS.Test
             var response = new DBResponse<BaseServerProvider<MongoClient>>
             {
                 HasValue = false
-            };
+            }; 
+                
             try
             {
                 var _server = new MongoClient(
@@ -48,6 +52,7 @@ namespace BotFS.Test
                             )
                     }
                     );
+                this.Provider.Server = _server;
                 MongoDatabase ping = (MongoDatabase)this.GetDatabase("local").Response;
                 var innerProvider = new MongoProvider
                 {
@@ -56,6 +61,7 @@ namespace BotFS.Test
                 };
                 response.HasValue = true;
                 response.Response = innerProvider;
+                
                 Log(this.Name, "Connected.");
             }
             catch (TimeoutException)

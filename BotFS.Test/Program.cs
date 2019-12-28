@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Driver;
+using System;
 
 namespace BotFS.Test
 {
@@ -6,7 +7,9 @@ namespace BotFS.Test
     {
         static void Main(string[] args)
         {
-            Mongo m = new Mongo("mongodb://localhost","test database");
+            Mongo m = new Mongo("http://google.com","test database");
+            MongoDatabase teste = m.GetDatabase("teste");
+            
             Console.WriteLine("AAAAAAAAAAA");
         }
     }

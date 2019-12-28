@@ -12,6 +12,7 @@ namespace BotFS
         public T Server { get; set; }
         public List<String> Databases { get; set; } 
         public ServerStatus Status { get; set; }
+        public DBResponse<List<String>> Refresh();
     }
 
     public enum ServerStatus

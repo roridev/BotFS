@@ -13,7 +13,7 @@ namespace BotFS.Test
             {
                 Name = db.DatabaseNamespace.DatabaseName,
                 Tables = db.ListCollectionNames().ToList(),
-                Server = srv,
+                Provider = srv,
                 Size = db.ListCollectionNames().ToList().Count
             };
             return responce;
