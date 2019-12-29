@@ -4,9 +4,10 @@ A general purpose database wrapper with multiple database providers.
 
 ### Status of the NuGet Package : 
 
-❌ Not Available 
+[![NuGet - BotFS](https://img.shields.io/nuget/vpre/BotFS.svg)](https://nuget.org/packages/BotFS) 
+[![NuGet - BotFS.MongoDB](https://img.shields.io/nuget/vpre/BotFS.MongoDB.svg)](https://nuget.org/packages/BotFS.MongoDB) 
 ## How to use BotFS
-`Once the package is available, Install the Nuget Packages with:`
+`Install the Nuget Packages with:`
 `nuget install BotFS.Provider`
 
 Eg. Connecting to a MongoDB database
