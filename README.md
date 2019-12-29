@@ -2,7 +2,7 @@
 # BotFS
 A general purpose database wrapper with multiple database providers.
 
-### Status of the NuGet Package : 
+### Status of the NuGet Packages : 
 
 BotFS : [![BotFS](https://img.shields.io/nuget/vpre/BotFS.svg)](https://nuget.org/packages/BotFS) 
 
