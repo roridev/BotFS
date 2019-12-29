@@ -5,6 +5,14 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <ApplicationIcon />
     <StartupObject />
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>roridev</Authors>
+    <Description>The bot filesystem - MongoDB Wrapper</Description>
+    <Copyright>© NotALoliconDevelopment, 2019</Copyright>
+    <PackageProjectUrl>https://github.com/RORIdev/BotFS</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/RORIdev/BotFS.git</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageTags>MongoDB; Wrapper;</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
