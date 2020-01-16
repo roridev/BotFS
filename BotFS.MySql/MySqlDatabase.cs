@@ -35,7 +35,7 @@ namespace BotFS.MySql
             {
                 HasValue = false
             };
-            if (this.Provider.Server.Database != this.Name) this.Provider.Server.Execute($"use {this.Name};");
+            if (this.Provider.Server.Database != this.Name) this.Provider.Server.ChangeDatabase(this.Name);
             response.HasValue = true;
             this.Tables = this.Provider.Server.Query<string>("show tables;").AsList<string>();
             this.Size = this.Tables.Count;
