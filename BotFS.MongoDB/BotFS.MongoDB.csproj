@@ -13,9 +13,9 @@
 		<RepositoryUrl>https://github.com/RORIdev/BotFS.git</RepositoryUrl>
 		<RepositoryType>Git</RepositoryType>
 		<PackageTags>MongoDB; Wrapper;</PackageTags>
-		<Version>1.2.6</Version>
-		<AssemblyVersion>1.2.6.0</AssemblyVersion>
-		<FileVersion>1.2.6.0</FileVersion>
+		<Version>2.0.1</Version>
+		<AssemblyVersion>2.0.1.0</AssemblyVersion>
+		<FileVersion>2.0.1.0</FileVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
